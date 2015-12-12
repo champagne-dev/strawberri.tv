@@ -1,10 +1,13 @@
 import json, os
-from bin import cron as c
 from flask import Flask, render_template, jsonify, request, send_from_directory
+from flask_socketio import SocketIO, join_room, leave_room
 from configs import config
+from utils import cron as c
 from utils import db
+from utils import video
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='/static/')
+socketio = SocketIO(app)
 success = [
     {
         "error": False,
@@ -12,15 +15,23 @@ success = [
     }
 ]
 
-@app.before_request
-def before_request():
-    if request.method == "GET":
-        print "GET REQUEST"
+# @app.before_request
+# def before_request():
+#     if request.method == "GET":
+#         print "GET REQUEST"
     
 @app.route("/", methods=["GET"])
 def indexView():
     channels = db.find_all_channels()
-    return render_template("index.html", channels=json.dumps(channels))
+    mapped_channels = list(map(lambda x: {
+        "channel_name": x["channel_name"],
+        "hashtag": x["hashtag"],
+        "urls": x["urls"],
+        "index": x["index"],
+        "video_start": x["video_start"]
+    }, channels))
+    
+    return render_template("index.html", channels=mapped_channels)
 
 @app.route("/createChannel", methods=["POST"])
 def createChannel():
@@ -67,8 +78,19 @@ def all_exception_handler(error):
     print error
     return render_template("error.html", error_message="Wrong page boi")
 
+@socketio.on('joinChannel')
+def handle_join(data):
+    room = data['channel_name']
+    join_room(room)
+    emit('joinedUser', broadcast=True)
+
+@socketio.on('leaveChannel')
+def handle_leave(data):
+    room = data['channel_name']
+    leave_room(room)
+    emit('joinedUser', broadcast=True)
+
 if __name__ == "__main__":
     cwd = os.path.dirname(os.path.realpath(__file__))
-    c.run(cwd+"/bin/pushURL.py")
-    app.run(debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
-
+    c.run(cwd+"/pushURL.py")
+    socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])

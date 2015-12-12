@@ -1,20 +1,14 @@
-import sys
-
-if __name__ == "__main__":
-	from .. import db
-	from .. import video
-else:
-	from utils import db
-	from utils import video
+import sys, os
 
 def run():
 	try:
 		all_channels = db.find_all_channels()
-
+		if all_channels.count() <= 0:
+			print "No Channels Exist"
 		for channel in all_channels:
 			query_string = channel["query_string"]
 			url = video.get_url(query_string, channel["page"], channel["pageIndex"])
-			print str(url)
+			print channel["channel_name"]+" "+str(url)
 			sys.stdout.flush()
 			if channel["pageIndex"] == 9:
 				new_page = True
@@ -27,4 +21,10 @@ def run():
 		print e
 		sys.stdout.flush()
 
-print "running"
+if __name__ == "__main__":
+	from utils import db
+	from utils import video
+	run()
+else:
+	from utils import db
+	from utils import video
