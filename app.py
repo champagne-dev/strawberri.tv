@@ -1,11 +1,13 @@
 import json, os
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from flask_socketio import SocketIO, join_room, leave_room
+from werkzeug.contrib.cache import SimpleCache
 from configs import config
 from utils import cron as c
 from utils import db
 from utils import video
 
+cache = SimpleCache()
 app = Flask(__name__, static_url_path='/static/')
 socketio = SocketIO(app)
 success = [
@@ -82,13 +84,19 @@ def all_exception_handler(error):
 def handle_join(data):
     room = data['channel_name']
     join_room(room)
-    emit('joinedUser', broadcast=True)
+    person_count = cache.get(room+":count")
+    cache.set(room+":count", person_count+1)
+
+    emit('userJoined', {"count": person_count+1}, broadcast=True)
 
 @socketio.on('leaveChannel')
 def handle_leave(data):
     room = data['channel_name']
     leave_room(room)
-    emit('joinedUser', broadcast=True)
+    person_count = cache.get(room+":count")
+    cache.set(room+":count", person_count-1)
+
+    emit('userLeft', broadcast=True)
 
 if __name__ == "__main__":
     cwd = os.path.dirname(os.path.realpath(__file__))
