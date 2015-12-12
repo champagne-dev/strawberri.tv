@@ -1,0 +1,45 @@
+.top-bar{
+	position: absolute;
+	width: 100%;
+	height: 50px;
+	top: 0;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+	z-index: 3;
+}
+.top-bar.hidden{
+	top: -50px;
+	height: 100px;
+}
+.top-bar > .full-bar{
+	width: 100%;
+	height: 50px;
+	background-color: rgba(255,255,255,.8);
+	display: block;
+}
+.top-bar > .full-bar > .channels{
+	margin: auto;
+	width: auto;
+	height: 30px;
+	top: 12px;
+	position: relative;
+	text-align: center;
+}
+.top-bar > .full-bar > .channels > .child{
+	display: inline;
+	margin-left: 15px;
+	margin-right: 15px;
+	cursor: pointer;
+}
+.top-bar > .full-bar > .channels > .child:hover{
+	opacity: .6;
+}
+.top-bar > .timer-bar{
+	width: 100%;
+	height: 3px;
+	background-color: rgba(255,255,255,.3);
+	border-top: #aaa;
+	display: block;
+}

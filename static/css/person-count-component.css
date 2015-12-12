@@ -1,0 +1,17 @@
+.person-count{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	border: 1px solid white;
+	background-color: #ccc;
+	left: 50px;
+	top: 50px;
+	-webkit-transition: top .2s ease-in-out;
+	-moz-transition: top .2s ease-in-out;
+	-o-transition: top .2s ease-in-out;
+	transition: top .2s ease-in-out;
+	z-index: 2;
+}
+.person-count.pushed{
+	top: 100px;
+}

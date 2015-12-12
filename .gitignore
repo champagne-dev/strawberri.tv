@@ -58,3 +58,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+node_modules/
+
+.DS_Store

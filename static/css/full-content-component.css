@@ -1,0 +1,13 @@
+div.full-content{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	-webkit-transition: left 1s ease-in-out;
+	-moz-transition: left 1s ease-in-out;
+	-o-transition: left 1s ease-in-out;
+	transition: left 1s ease-in-out;
+}
+div.full-content.hidden{
+	left: 100%;
+}
