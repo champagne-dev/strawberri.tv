@@ -25,3 +25,7 @@
 .create-channel > .close:hover{
 	opacity: .5
 }
+/*<div className="create-form">
+          <input className="channel-name"></input>
+          <a className="submit-btn"></a>
+        </div>*/

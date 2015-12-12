@@ -1,6 +1,6 @@
 var MainComponent = React.createClass({
   getInitialState: function(){
-  	return {"splashPageInvisible": false, "fullContentInvisible": true}
+  	return {"splashPageInvisible": true, "fullContentInvisible": false}
   },
   render: function() {
   	var self = this;

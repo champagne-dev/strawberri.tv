@@ -3,7 +3,7 @@ window.FullContentComponent = React.createClass({
     invisible: React.PropTypes.bool.isRequired,
   },
   getInitialState: function(){
-    return {"fullChannelsInvisible":true, "createChannelInvisible": true, "topBarInvisible": true, "visibleElementsPushed": false}
+    return {"fullChannelsInvisible":true, "createChannelInvisible": false, "topBarInvisible": true, "visibleElementsPushed": false}
   },
   __topBarMouseEnter: function(){
     this.setState({"topBarInvisible": false, "visibleElementsPushed": true})

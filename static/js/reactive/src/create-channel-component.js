@@ -7,6 +7,11 @@ window.CreateChannelComponent = React.createClass({
     var specialClassName = this.props.invisible ? " hidden" : "";
     return (
       <div className={"create-channel" + specialClassName}>
+        <div className="create-form">
+          <h5> Create Channel </h5>
+          <input className="channel-name"></input>
+          <a className="submit-btn"></a>
+        </div>
         <div className="close fa fa-times" onClick={this.props.onClose}>
         </div>
       </div>
