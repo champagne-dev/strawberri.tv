@@ -1,6 +1,6 @@
-import json, os, atexit
+import json, os, atexit, sys
 from flask import Flask, render_template, jsonify, request, send_from_directory
-from flask_socketio import SocketIO, join_room, leave_room
+from flask_socketio import SocketIO, join_room, leave_room, emit
 from werkzeug.contrib.cache import SimpleCache
 from configs import config
 from utils import cron as c
@@ -30,8 +30,7 @@ def indexView():
     for channel in channels:
         mapped_channels[channel["index"]] = {
             "channel_name": channel["channel_name"],
-            "hashtag": channel["hashtag"],
-            "urls": channel["urls"]
+            "hashtag": channel["hashtag"]
         }
     
     print mapped_channels
@@ -86,7 +85,12 @@ def all_exception_handler(error):
 def handle_join(data):
     room = data['channel_name']
     join_room(room)
-    person_count = cache.get(room+":count")
+    count = cache.get(room+":count")
+    if count is None:
+        person_count = 0
+    else:
+        person_count = int(count)
+
     cache.set(room+":count", person_count+1)
 
     emit('userJoined', {"count": person_count+1}, broadcast=True)
@@ -95,16 +99,18 @@ def handle_join(data):
 def handle_leave(data):
     room = data['channel_name']
     leave_room(room)
-    person_count = cache.get(room+":count")
-    cache.set(room+":count", person_count-1)
+    count = cache.get(room+":count")
+    if count is not None:
+        person_count = int(cache.get(room+":count"))
+        cache.set(room+":count", int(person_count)-1)
 
     emit('userLeft', broadcast=True)
 
 if __name__ == "__main__":
+    cwd = os.path.dirname(os.path.realpath(__file__))
     def close_handler():
         c.exit()
 
-    cwd = os.path.dirname(os.path.realpath(__file__))
-    c.run(cwd+"/pushURL.py", False)
     atexit.register(close_handler)
+    c.run(cwd+"/pushURL.py", False)
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
