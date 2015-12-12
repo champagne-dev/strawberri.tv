@@ -1,5 +1,5 @@
-import json, os, atexit, sys
-from flask import Flask, render_template, jsonify, request, send_from_directory
+import json, os, atexit, sys, random
+from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from flask_socketio import SocketIO, join_room, leave_room, emit
 from werkzeug.contrib.cache import SimpleCache
 from configs import config
@@ -31,10 +31,18 @@ def indexView():
         mapped_channels[channel["index"]] = {
             "channel_name": channel["channel_name"],
             "hashtag": channel["hashtag"]
-        }
-    
-    print mapped_channels
-    return render_template("index.html", channels=json.dumps(mapped_channels))
+        }  
+
+    channel_hashtag = request.args.get('c')
+
+    if channel_hashtag is None:
+        random_channel = random.choice(mapped_channels)
+        random_channel_hashtag = random_channel["hashtag"]
+        return redirect("/?c="+random_channel_hashtag)
+    else:
+        current_channel = db.find_channel_by_hashtag(channel_hashtag)
+        print mapped_channels
+        return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=json.dumps(current_channel))
 
 @app.route("/createChannel", methods=["POST"])
 def createChannel():
@@ -71,6 +79,7 @@ def createChannel():
             return jsonify(results=error)
     except:
         return jsonify(results=error)
+
 
 @app.route('/static/<path:path>')
 def send_static(path):

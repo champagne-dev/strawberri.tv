@@ -25,6 +25,9 @@ def channel_count():
 def find_all_channels():
 	return db.channels.find({})
 
+def find_channel_by_hashtag(channel_hashtag):
+	return db.channels.find({"hashtag": channel_hashtag})
+
 def channel_exists(channel_name):
 	count = db.channels.find({'channel_name': channel_name}).count()
 	if count > 0:
