@@ -106,3 +106,5 @@ Traceback (most recent call last):
     from .. import db
 ValueError: ValueErrorAttempted relative import in non-package: 
 Attempted relative import in non-package
+/bin/sh: /Users/jawerty/Documents/projects/strawberri.tv/venv/bin/python: No such file or directory
+/bin/sh: /Users/jawerty/Documents/projects/strawberri.tv/venv/bin/python: No such file or directory
