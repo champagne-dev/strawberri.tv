@@ -1,4 +1,4 @@
-import datetime, sys
+import time, sys
 from pymongo import MongoClient
 from configs import config
 from utils import video
@@ -26,7 +26,7 @@ def find_all_channels():
 	return db.channels.find({})
 
 def find_channel_by_hashtag(channel_hashtag):
-	return db.channels.find({"hashtag": channel_hashtag})
+	return db.channels.find_one({"hashtag": channel_hashtag})
 
 def channel_exists(channel_name):
 	count = db.channels.find({'channel_name': channel_name}).count()
@@ -43,13 +43,13 @@ def create_channel(channel_name):
 		"hashtag": getHashtag(channel_name),
 		"query_string": video.build_query_string(channel_name),
 		"urls": ['','','','','','','','','','','','','','','','','','','',''],
-		"created_date": datetime.datetime.utcnow(),
+		"created_date": time.time(),
 		"index": ch_count,
 		"video_start": 0,
 		"page": 1,
 		"pageIndex": 0,
 		"latest_tweets": [],
-		"url_timestamps": ['','','','','','','','','','','','','','','','','','','','']
+		"url_timestamps": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	}
 
 	try:
@@ -63,7 +63,9 @@ def create_channel(channel_name):
 	sys.stdout.flush()
 
 def channel_push_url(channel_name, url, new_page):
-	time = datetime.datetime.utcnow()
+	t = time.time()
+	print t
+
 	query = {
 		'$pop': { 
 			"urls" : -1 
@@ -75,10 +77,10 @@ def channel_push_url(channel_name, url, new_page):
 			"url_timestamps" : -1 
 		},
 		'$push': {
-			'url_timestamps': time
+			'url_timestamps': t
 		},
 		'$set': {
-			'video_start': time
+			'video_start': t
 		}
 	}
 

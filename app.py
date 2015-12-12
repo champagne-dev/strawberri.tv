@@ -1,6 +1,7 @@
 import json, os, atexit, sys, random
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from flask_socketio import SocketIO, join_room, leave_room, emit
+from bson.json_util import dumps
 from werkzeug.contrib.cache import SimpleCache
 from configs import config
 from utils import cron as c
@@ -40,16 +41,16 @@ def indexView():
         random_channel_hashtag = random_channel["hashtag"]
         return redirect("/?c="+random_channel_hashtag)
     else:
-        current_channel = db.find_channel_by_hashtag(channel_hashtag)
-        for i, timestamp in enumerate(current_channel["url_timestamps"]):
-            if timestamp == current_channel["video_start"]
-                current_url_index = i
+        current_url_index = 0
 
-        if not channel_url_index:
-            current_url_index = 0
+        current_channel = db.find_channel_by_hashtag(channel_hashtag)
+
+        for i, timestamp in enumerate(current_channel["url_timestamps"]):
+            if timestamp == current_channel["video_start"]:
+                current_url_index = i 
 
         print mapped_channels
-        return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=json.dumps(current_channel), current_url_index=current_url_index)
+        return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=dumps(current_channel), current_url_index=current_url_index)
 
 @app.route("/createChannel", methods=["POST"])
 def createChannel():
@@ -84,7 +85,9 @@ def createChannel():
             return jsonify(results=success)
         else:
             return jsonify(results=error)
-    except:
+
+    except Exception as e:
+        print e
         return jsonify(results=error)
 
 
