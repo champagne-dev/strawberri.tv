@@ -1,6 +1,6 @@
 var STRAWBERRI = STRAWBERRI || {};
 STRAWBERRI.ajax = {
-	createChannel: function(name, success) {
+	createChannel: function(channel_name, success) {
 
 		var data = {
 			channel_name: channel_name
