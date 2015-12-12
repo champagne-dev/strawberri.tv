@@ -6,7 +6,7 @@ var MainComponent = React.createClass({
   	var self = this;
   	setTimeout(function(){
   		self.setState({"splashPageInvisible": true, "fullContentInvisible": false})
-  	}, 500)
+  	}, 1000)
     return (
       <div className="wrapper">
     	<SplashPageComponent invisible={this.state.splashPageInvisible} />
