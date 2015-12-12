@@ -1,8 +1,9 @@
 import sys, os
+from utils import twitter
 
 def setTweets():
 	return
-	
+
 def run():
 	try:
 		all_channels = db.find_all_channels()

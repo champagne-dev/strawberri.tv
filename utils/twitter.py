@@ -1,8 +1,10 @@
-
+import sys
 from TwitterSearch import *
 
 def get_new_tweet_object(hashtag):
     try:
+        print hashtag
+        sys.stdout.flush()
         tso = TwitterSearchOrder() 
         tso.set_keywords([hashtag])
         tso.set_language('en')
@@ -15,7 +17,7 @@ def get_new_tweet_object(hashtag):
             access_token_secret = 'sZapDHCDN9DqELgePX9SAkEIW7YRRXkarHWB58KLOZHXp'
          )
 
-        return ts.search_tweets_iterable(tso):
+        return ts.search_tweets_iterable(tso)
     except TwitterSearchException as e: 
         print e
         return False
