@@ -106,6 +106,10 @@ def handle_leave(data):
 
     emit('userLeft', broadcast=True)
 
+@socketio.on_error()
+def error_handler(e):
+    print e
+
 if __name__ == "__main__":
     cwd = os.path.dirname(os.path.realpath(__file__))
     def close_handler():

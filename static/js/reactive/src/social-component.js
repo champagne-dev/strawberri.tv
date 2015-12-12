@@ -1,6 +1,6 @@
 window.SocialComponent = React.createClass({
   componentDidMount: function() {
-    var canonical_url = "http://localhost:5000/"; //should be commented out
+    var canonical_url = "http://localhost:5000"; //should be commented out
     window.socket = io(canonical_url);
 
     window.socket.emit("joinChannel", {channel_name: "channel name"});
