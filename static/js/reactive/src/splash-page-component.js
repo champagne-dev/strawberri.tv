@@ -8,7 +8,7 @@ window.SplashPageComponent = React.createClass({
       <div className={"splash-page" + specialClassName}>
         <div className="wrapper">
           <div className="centered">
-            <img className="main-image" src="static/img/strawberri.png">
+            <img className="main-image" src="static/img/strawberri_3.png">
             </img>
             <img className="loading-image" src="static/img/loading.gif">
             </img>
