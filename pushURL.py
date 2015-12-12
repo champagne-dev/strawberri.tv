@@ -1,5 +1,8 @@
 import sys, os
 
+def setTweets():
+	return
+	
 def run():
 	try:
 		all_channels = db.find_all_channels()

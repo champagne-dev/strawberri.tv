@@ -10,6 +10,15 @@ client = MongoClient('mongodb://'+host+':'+port+'/')
 
 db = client[database_name]
 
+def getHashtag(channel_name):
+	hashtag = ""
+	upper_channel_name = channel_name.title()
+	channel_name_array = upper_channel_name.split(" ")
+	for ch in channel_name_array:
+		hashtag += ch
+
+	return hashtag
+
 def channel_count():
 	return db.channels.count()
 
@@ -28,14 +37,15 @@ def create_channel(channel_name):
 
 	channel = {
 		"channel_name": channel_name,
-		"hashtag": channel_name,
+		"hashtag": getHashtag(channel_name),
 		"query_string": video.build_query_string(channel_name),
 		"urls": [],
 		"created_date": datetime.datetime.utcnow(),
 		"index": ch_count,
 		"video_start": 0,
 		"page": 1,
-		"pageIndex": 0
+		"pageIndex": 0,
+		"latest_tweets": []
 	}
 
 	try:
@@ -78,3 +88,30 @@ def channel_push_url(channel_name, url, new_page):
 	except Exception as e:
 		print e
 		return False	
+
+def channel_push_tweet(channel_name, tweet_object):
+	tweet_string = json.dumps(tweet_object)
+	try:
+		db.channels.update_one({
+			'channel_name': channel_name
+		}, {
+			'$push': {
+				'latest_tweets': tweet_string
+			}
+		}, upsert=False)
+	except Exception as e:
+		print e
+		return False
+
+def channel_set_tweets(channel_name, tweets):
+	try:
+		db.channels.update_one({
+			'channel_name': channel_name
+		}, {
+			'$set': {
+				'latest_tweets': tweets
+			}
+		}, upsert=False)
+	except Exception as e:
+		print e
+		return False
