@@ -17,7 +17,9 @@ def get_new_tweet_object(hashtag):
             access_token_secret = 'sZapDHCDN9DqELgePX9SAkEIW7YRRXkarHWB58KLOZHXp'
          )
 
-        return ts.search_tweets_iterable(tso)
+        tweets = ts.search_tweets_iterable(tso)
+        print tweets
+        return tweets
     except TwitterSearchException as e: 
         print e
         return False

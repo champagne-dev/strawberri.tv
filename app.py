@@ -1,4 +1,4 @@
-import json, os
+import json, os, atexit
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from flask_socketio import SocketIO, join_room, leave_room
 from werkzeug.contrib.cache import SimpleCache
@@ -99,6 +99,10 @@ def handle_leave(data):
     emit('userLeft', broadcast=True)
 
 if __name__ == "__main__":
+    def close_handler():
+        c.exit()
+
     cwd = os.path.dirname(os.path.realpath(__file__))
-    c.run(cwd+"/pushURL.py")
+    c.run(cwd+"/pushURL.py", cwd+"/pushTweets.py")
+    atexit.register(close_handler)
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])

@@ -1,8 +1,6 @@
 import sys, os
-from utils import twitter
-
-def setTweets():
-	return
+from utils import db
+from utils import video
 
 def run():
 	try:
@@ -26,9 +24,4 @@ def run():
 		sys.stdout.flush()
 
 if __name__ == "__main__":
-	from utils import db
-	from utils import video
 	run()
-else:
-	from utils import db
-	from utils import video
