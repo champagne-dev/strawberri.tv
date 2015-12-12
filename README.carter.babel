@@ -1,0 +1,6 @@
+IN ORDER TO WATCH DIR FOR CHANGES TO REACT FILES AND UPDATE THE JSX TO REAL JS:
+CALL THESE COMMANDS FROM /static/js/reactive/
+sudo npm install babel-preset-es2015 --save --no-bin-links
+sudo npm install babel-preset-react --save --no-bin-links
+babel --presets es2015,react --watch src/ --out-dir lib/
+
