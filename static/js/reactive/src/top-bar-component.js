@@ -14,10 +14,10 @@ window.TopBarComponent = React.createClass({
       <div className={"top-bar" + specialClassName} onMouseEnter={this.props.onMouseEnter} onMouseLeave={this.props.onMouseLeave} >
         <div className="full-bar">
           <div className="channels">
-            <a className="left arrow child" onClick={this.props.onLeftChannel}>Left</a>
+            <a className="create-btn child" onClick={this.props.onCreateChannel}><i className="fa fa-plus"></i></a>
+            <a className="left arrow child" onClick={this.props.onLeftChannel}><i className="fa fa-chevron-left"></i></a>
             <h4 className="current child" onClick={this.props.onChannelClick}>Current Channel</h4>
-            <a className="right arrow child" onClick={this.props.onRightChannel}>Right</a>
-            <a className="create-btn child" onClick={this.props.onCreateChannel}>+</a>
+            <a className="right arrow child" onClick={this.props.onRightChannel}><i className="fa fa-chevron-right"></i></a>
           </div>
         </div>
         <div className="timer-bar">
