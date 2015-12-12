@@ -37,6 +37,9 @@ def indexView():
             "hashtag": channel["hashtag"]
         }  
 
+    if not mapped_channels:
+        return render_template("error.html", error_message="No Channels Created")
+
     channel_hashtag = request.args.get('c')
 
     if channel_hashtag is None:
