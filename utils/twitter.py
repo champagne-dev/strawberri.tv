@@ -18,11 +18,15 @@ def get_new_tweet_object(hashtag):
          )
 
         tweets = ts.search_tweets_iterable(tso)
-        print tweets
-        return tweets
+        tweets_string = serializeTweets(tweets)
+        return tweets_string
     except TwitterSearchException as e: 
         print e
         return False
+
+def serializeTweets(tweets):
+    for tweet in tweets
+        print tweets
 
 def diff_tweets(old_tweets, new_tweets):
     new_tweets = set(new_tweets)

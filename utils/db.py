@@ -25,6 +25,9 @@ def channel_count():
 def find_all_channels():
 	return db.channels.find({})
 
+def find_channel_by_hashtag(channel_hashtag):
+	return db.channels.find({"hashtag": channel_hashtag})
+
 def channel_exists(channel_name):
 	count = db.channels.find({'channel_name': channel_name}).count()
 	if count > 0:
@@ -39,13 +42,14 @@ def create_channel(channel_name):
 		"channel_name": channel_name,
 		"hashtag": getHashtag(channel_name),
 		"query_string": video.build_query_string(channel_name),
-		"urls": [],
+		"urls": ['','','','','','','','','','','','','','','','','','','',''],
 		"created_date": datetime.datetime.utcnow(),
 		"index": ch_count,
 		"video_start": 0,
 		"page": 1,
 		"pageIndex": 0,
-		"latest_tweets": []
+		"latest_tweets": [],
+		"url_timestamps": ['','','','','','','','','','','','','','','','','','','','']
 	}
 
 	try:
@@ -59,12 +63,22 @@ def create_channel(channel_name):
 	sys.stdout.flush()
 
 def channel_push_url(channel_name, url, new_page):
+	time = datetime.datetime.utcnow()
 	query = {
+		'$pop': { 
+			"urls" : -1 
+		},
 		'$push': {
 			'urls': url
 		},
+		'$pop': { 
+			"url_timestamps" : -1 
+		},
+		'$push': {
+			'url_timestamps': time
+		},
 		'$set': {
-			'video_start': datetime.datetime.utcnow()
+			'video_start': time
 		}
 	}
 
