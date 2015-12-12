@@ -25,15 +25,17 @@ success = [
 @app.route("/", methods=["GET"])
 def indexView():
     channels = db.find_all_channels()
-    mapped_channels = list(map(lambda x: {
-        "channel_name": x["channel_name"],
-        "hashtag": x["hashtag"],
-        "urls": x["urls"],
-        "index": x["index"],
-        "video_start": x["video_start"]
-    }, channels))
+    mapped_channels = dict()
+
+    for channel in channels:
+        mapped_channels[channel["index"]] = {
+            "channel_name": channel["channel_name"],
+            "hashtag": channel["hashtag"],
+            "urls": channel["urls"]
+        }
     
-    return render_template("index.html", channels=mapped_channels)
+    print mapped_channels
+    return render_template("index.html", channels=json.dumps(mapped_channels))
 
 @app.route("/createChannel", methods=["POST"])
 def createChannel():
@@ -103,6 +105,6 @@ if __name__ == "__main__":
         c.exit()
 
     cwd = os.path.dirname(os.path.realpath(__file__))
-    c.run(cwd+"/pushURL.py", cwd+"/pushTweets.py")
+    c.run(cwd+"/pushURL.py", False)
     atexit.register(close_handler)
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
