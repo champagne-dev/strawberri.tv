@@ -41,8 +41,15 @@ def indexView():
         return redirect("/?c="+random_channel_hashtag)
     else:
         current_channel = db.find_channel_by_hashtag(channel_hashtag)
+        for i, timestamp in enumerate(current_channel["url_timestamps"]):
+            if timestamp == current_channel["video_start"]
+                current_url_index = i
+
+        if not channel_url_index:
+            current_url_index = 0
+
         print mapped_channels
-        return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=json.dumps(current_channel))
+        return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=json.dumps(current_channel), current_url_index=current_url_index)
 
 @app.route("/createChannel", methods=["POST"])
 def createChannel():
