@@ -19,11 +19,11 @@ window.CreateChannelComponent = React.createClass({
     return (
       <div className={"create-channel" + specialClassName}>
         <div className="create-form">
-          <h5 className="header">Create Channel</h5>
+          <p className="header">Create Channel</p>
           <input className="channel-name" value={this.state.channel_name} onChange={this.__handleInputChange} ></input>
           <a className="submit-btn" onClick={this.__onSubmit}>SUBMIT</a>
         </div>
-        <div className="close fa fa-times" onClick={this.props.onClose}>
+        <div className="close" onClick={this.props.onClose}>
         </div>
       </div>
     );
