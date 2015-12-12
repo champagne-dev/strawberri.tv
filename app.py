@@ -1,4 +1,4 @@
-import json, os, atexit, sys, random
+import json, os, atexit, sys, random, argparse
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from flask_socketio import SocketIO, join_room, leave_room, emit
 from bson.json_util import dumps
@@ -7,6 +7,9 @@ from configs import config
 from utils import cron as c
 from utils import db
 from utils import video
+
+parser = argparse.ArgumentParser(description='strawberri server')
+parser.add_argument('-c', '--cron', action='store_true', help='runs cron')
 
 cache = SimpleCache()
 app = Flask(__name__, static_url_path='/static/')
@@ -130,10 +133,14 @@ def error_handler(e):
     print e
 
 if __name__ == "__main__":
+    args = parser.parse_args()
     cwd = os.path.dirname(os.path.realpath(__file__))
-    def close_handler():
-        c.exit()
+    
+    if args.cron:
+        def close_handler():
+            c.exit()
 
-    atexit.register(close_handler)
-    c.run(cwd+"/pushURL.py", False)
+        atexit.register(close_handler)
+        c.run(cwd+"/pushURL.py", False)
+
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
