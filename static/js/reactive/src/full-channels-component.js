@@ -28,10 +28,15 @@ window.FullChannelsComponent = React.createClass({
     current_channel: React.PropTypes.object.isRequired,
   },
   getInitialState: function(){
-    return {"search_value": ""};
+    return {"search_value": "", "search_value_real": ""};
   },
   __handleInputChange: function(event){
     this.setState({search_value: event.target.value});
+    clearTimeout(STRAWBERRI.inputSearchTimeout);
+    var self = this;
+    STRAWBERRI.inputSearchTimeout = setTimeout(function(){
+      self.setState({search_value_real:self.state.search_value});
+    }, 700)
   },
   render: function() {
     var specialClassName = this.props.invisible ? " hidden" : "";
@@ -39,7 +44,7 @@ window.FullChannelsComponent = React.createClass({
     for(var id in this.props.channels){
       var _channel = this.props.channels[id];
       var invisible = true;
-      if(this.state.search_value == "" || _channel.channel_name.indexOf(this.state.search_value) > -1)
+      if(this.state.search_value_real == "" || _channel.channel_name.indexOf(this.state.search_value_real) > -1)
         invisible = false;
       _channels.push(<IndividualChannelComponent key={parseInt(id)} invisible={invisible} index={parseInt(id)} hashtag={_channel.hashtag} name={_channel.channel_name}/>)
     }
