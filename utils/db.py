@@ -62,8 +62,8 @@ def create_channel(channel_name):
 
 	sys.stdout.flush()
 
-def channel_push_url(channel_name, url, new_page):
-	t = time.time()
+def channel_push_url(channel_name, url, new_page, google_next):
+	t = int(round(time.time() * 1000))
 	print url
 
 	query = {
@@ -77,13 +77,13 @@ def channel_push_url(channel_name, url, new_page):
 	}
 
 	try:
-		if new_page:
+		if new_page and google_next:
 			query["$inc"] = {
 				"page": 1
 			}
 			query["$set"]["pageIndex"] = 0
 
-		else:
+		elif google_next == True:
 			query["$inc"] = {
 				"pageIndex": 1
 			}

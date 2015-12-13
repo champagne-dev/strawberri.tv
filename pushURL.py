@@ -11,18 +11,23 @@ def run():
 			query_string = channel["query_string"]
 			url = video.get_url(query_string, channel["page"], channel["pageIndex"])
 			
+
 			sys.stdout.flush()
-			if channel["pageIndex"] == 9:
-				new_page = True
-			else:
-				new_page = False
+			
 
 			if url:
+				if channel["pageIndex"] == 9 and url[1] == True:
+					new_page = True
+				else:
+					new_page = False
+
 				print url
 				print channel["channel_name"]+" "+str(url[0])
 				if url[1]:
 					google_next = True
-				db.channel_push_url(channel["channel_name"], url[0], new_page)
+
+				db.channel_push_url(channel["channel_name"], url[0], new_page, google_next)
+				
 	except Exception as e:
 		print e
 		sys.stdout.flush()
