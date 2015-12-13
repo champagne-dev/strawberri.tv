@@ -64,19 +64,11 @@ def create_channel(channel_name):
 
 def channel_push_url(channel_name, url, new_page):
 	t = time.time()
-	print t
+	print url
 
 	query = {
-		'$pop': { 
-			"urls" : -1 
-		},
 		'$push': {
-			'urls': url
-		},
-		'$pop': { 
-			"url_timestamps" : -1 
-		},
-		'$push': {
+			'urls': url,
 			'url_timestamps': t
 		},
 		'$set': {
@@ -98,8 +90,16 @@ def channel_push_url(channel_name, url, new_page):
 
 		db.channels.update_one({
 			'channel_name': channel_name
+		}, 
+		{
+			'$pop': { 
+				'urls' : -1,
+				"url_timestamps" : -1 
+			}
+		}, upsert=False)
+		db.channels.update_one({
+			'channel_name': channel_name
 		}, query, upsert=False)
-		
 		return True
 	except Exception as e:
 		print e
