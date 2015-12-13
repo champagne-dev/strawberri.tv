@@ -8,10 +8,10 @@ base_url = {
 	},
 	"google": {
 		"search": "http://www.google.com/search?tbm=vid&tbs=dur:s&tbs=srcf:H4sIAAAAAAAAACWLQQqAMAwEf5OL0IsvSmOohZqVNkH6e6XeBmZmmwiPrElwUZt28KJn7zoQXX4xwHfUhF6I8zdI9ZlMndjYnV3lNDSUqmP1L5g3i0JWAAAA&q=",
+	},
+	"youtube": {
+		"search": "https://www.youtube.com/results?search_query=",
 	}
-	# bing: {
-	# 	search: "http://www.bing.com/videos/search?qs=n&qft=+filterui:msite-youtube.com&q=",
-	# }
 }
 
 class FetchURL():
@@ -39,8 +39,10 @@ class FetchURL():
 		else:
 			return link
 
-	def bing(self, document, i):
-		links = document.select(".vthumb")
+	def youtube(self, document, i):
+		links = document.select(".yt-lockup-title > a")
+		link = random.choice(links)
+		return link["href"]
 
 	def get_youtube_link(self, url):
 		parsed = urlparse(url)
@@ -98,6 +100,7 @@ def get_url(query_string, page, index):
 	document = BeautifulSoup(body)
 
 	try:
+		print randomEngine
 		f = FetchURL(randomEngine, index, document)
 		url = f.get_url()
 		return [url, google]
