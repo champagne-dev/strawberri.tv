@@ -7,6 +7,7 @@ window.TopBarComponent = React.createClass({
     onRightChannel: React.PropTypes.func.isRequired,
     onChannelClick: React.PropTypes.func.isRequired,
     onCreateChannel: React.PropTypes.func.isRequired,
+    current_channel: React.PropTypes.object.isRequired,
   },
   render: function() {
   	var specialClassName = this.props.invisible ? " hidden" : "";
@@ -16,7 +17,7 @@ window.TopBarComponent = React.createClass({
           <div className="channels">
             <a className="create-btn child" onClick={this.props.onCreateChannel}><i className="fa fa-plus"></i></a>
             <a className="left arrow child" onClick={this.props.onLeftChannel}><i className="fa fa-chevron-left"></i></a>
-            <h4 className="current child" onClick={this.props.onChannelClick}>Current Channel</h4>
+            <h4 className="current child" onClick={this.props.onChannelClick}>{this.props.current_channel.channel_name}</h4>
             <a className="right arrow child" onClick={this.props.onRightChannel}><i className="fa fa-chevron-right"></i></a>
           </div>
         </div>

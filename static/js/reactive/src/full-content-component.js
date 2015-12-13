@@ -1,6 +1,8 @@
 window.FullContentComponent = React.createClass({
   propTypes: {
     invisible: React.PropTypes.bool.isRequired,
+    channels: React.PropTypes.object.isRequired,
+    current_channel: React.PropTypes.object.isRequired,
   },
   getInitialState: function(){
     return {"fullChannelsInvisible":true, "createChannelInvisible": true, "topBarInvisible": true, "visibleElementsPushed": false}
@@ -33,9 +35,9 @@ window.FullContentComponent = React.createClass({
     var specialClassName = this.props.invisible ? " hidden" : "";
     return (
       <div className={"full-content" + specialClassName}>
-        <FullChannelsComponent invisible={this.state.fullChannelsInvisible} onClose={this.__onFullChannelsClose}/>
+        <FullChannelsComponent invisible={this.state.fullChannelsInvisible} channels={this.props.channels} current_channel={this.props.current_channel} onClose={this.__onFullChannelsClose}/>
         <CreateChannelComponent invisible={this.state.createChannelInvisible} onClose={this.__onCreateChannelClose}/>
-        <TopBarComponent invisible={this.state.topBarInvisible} onMouseEnter={this.__topBarMouseEnter} onMouseLeave={this.__topBarMouseLeave} onLeftChannel={this.__onLeftChannel} onRightChannel={this.__onRightChannel} onChannelClick={this.__onChannelClick} onCreateChannel={this.__onCreateChannel}/>
+        <TopBarComponent invisible={this.state.topBarInvisible} onMouseEnter={this.__topBarMouseEnter} onMouseLeave={this.__topBarMouseLeave} onLeftChannel={this.__onLeftChannel} onRightChannel={this.__onRightChannel} onChannelClick={this.__onChannelClick} onCreateChannel={this.__onCreateChannel} current_channel={this.props.current_channel}/>
         <PersonCountComponent pushed={this.state.visibleElementsPushed}/>
         <SocialComponent pushed={this.state.visibleElementsPushed}/>
         <VideoComponent />
