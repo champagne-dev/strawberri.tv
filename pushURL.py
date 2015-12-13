@@ -5,7 +5,7 @@ def get_url_jawn(query_string, channel, channel_push_url):
 	url = video.get_url(query_string, channel["page"], channel["pageIndex"])
 
 	if url:
-		if channel["pageIndex"] == 9 and url[1] == True:
+		if channel["pageIndex"] == 8 and url[1] == True:
 			new_page = True
 		else:
 			new_page = False

@@ -29,16 +29,18 @@ class FetchURL():
 
 	def google(self, document, i):
 		links = document.select("#search div ol h3 a")
-		link = links[i]["href"]
-		if link[0] == "/":
-			qs = parse_qs(urlparse(link).query)
-			if 'url' in qs:
-				return qs["url"][0]
-			elif 'q' in qs:
-				return qs["q"][0]
-		else:
-			return link
-
+		link = links[i+1]["href"]
+		try: 
+			if link[0] == "/":
+				qs = parse_qs(urlparse(link).query)
+				if 'url' in qs:
+					return qs["url"][0]
+				elif 'q' in qs:
+					return qs["q"][0]
+			else:
+				return link
+		except Exception as e:
+			return False
 	def youtube(self, document, i):
 		links = document.select(".yt-lockup-title > a")
 		link = random.choice(links)
@@ -47,6 +49,7 @@ class FetchURL():
 	def get_youtube_link(self, url):
 		parsed = urlparse(url)
 		v = parse_qs(parsed.query)['v'][0]
+		print "v"+v
 		embed = "http://www.youtube.com/embed/"+v
 		return embed
 
