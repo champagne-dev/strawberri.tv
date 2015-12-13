@@ -1,19 +1,19 @@
 import json, os, atexit, sys, random, argparse
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
-from flask_socketio import SocketIO, join_room, leave_room, emit
 from bson.json_util import dumps
-from werkzeug.contrib.cache import SimpleCache
 from configs import config
 from utils import cron as c
 from utils import db
 from utils import video
+from flask_socketio import SocketIO
+from websockets import websockets
 
 parser = argparse.ArgumentParser(description='strawberri server')
 parser.add_argument('-c', '--cron', action='store_true', help='runs cron')
 
-cache = SimpleCache()
 app = Flask(__name__, static_url_path='/static/')
 socketio = SocketIO(app)
+websockets(socketio)
 success = [
     {
         "error": False,
@@ -105,35 +105,6 @@ def send_static(path):
 def all_exception_handler(error):
     print error
     return render_template("error.html", error_message="Wrong page boi")
-
-@socketio.on('joinChannel')
-def handle_join(data):
-    room = data['channel_name']
-    join_room(room)
-    count = cache.get(room+":count")
-    if count is None:
-        person_count = 0
-    else:
-        person_count = int(count)
-
-    cache.set(room+":count", person_count+1)
-
-    emit('userJoined', {"count": person_count+1}, broadcast=True)
-
-@socketio.on('leaveChannel')
-def handle_leave(data):
-    room = data['channel_name']
-    leave_room(room)
-    count = cache.get(room+":count")
-    if count is not None:
-        person_count = int(cache.get(room+":count"))
-        cache.set(room+":count", int(person_count)-1)
-
-    emit('userLeft', broadcast=True)
-
-@socketio.on_error()
-def error_handler(e):
-    print e
 
 if __name__ == "__main__":
     args = parser.parse_args()
