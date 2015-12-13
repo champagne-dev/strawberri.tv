@@ -68,4 +68,25 @@
 	background-color: rgba(255,255,255,.3);
 	/*border-top: #aaa;*/
 	display: block;
+	position: relative;
+}
+.top-bar > .timer-bar > .timerbar-length{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+}
+.top-bar > .timer-bar > .filled{
+	z-index: 2;
+	width: 0;
+	background-color: green;
+	-webkit-transition: width .2s linear;
+	-moz-transition: width .2s linear;
+	-o-transition: width .2s linear;
+	transition: width .2s linear;
+}
+.top-bar > .timer-bar > .unfilled{
+	z-index: 1;
+	width: 100%;
+	background-color: red;
 }

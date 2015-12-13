@@ -9,8 +9,28 @@ window.TopBarComponent = React.createClass({
     onCreateChannel: React.PropTypes.func.isRequired,
     current_channel: React.PropTypes.object.isRequired,
   },
+  getInitialState: function(){
+    return {"timerpercent": 0, "fakeStart": 0, "end": 0}
+  },
+  _tickTock: function(){
+    var self = this;
+    setTimeout(function(){
+      var currenttime = Date.now();
+      var timefromstart = currenttime - self.state.fakeStart; // how far are we from the start
+      var percent = (timefromstart/(self.state.end-self.state.fakeStart)) * 100; // how big is that compared to total channel time
+      self.setState({"timerpercent": percent});
+      console.log(percent);
+      self._tickTock();
+    }, 1000)
+  },
+  componentDidMount: function(){
+    var fakeStart = 1450045753923; // Replace with start timestamp from current_channel object
+    this.setState({"fakeStart":fakeStart, "end": fakeStart+(1000*60*5)}) // 5 minutes = (millis * seconds * minutes)
+    this._tickTock();
+  },
   render: function() {
   	var specialClassName = this.props.invisible ? " hidden" : "";
+    var timerBarFilledStyle = { width: this.state.timerpercent+"%"};
     return (
       <div className={"top-bar" + specialClassName} onMouseEnter={this.props.onMouseEnter} onMouseLeave={this.props.onMouseLeave} >
         <div className="full-bar">
@@ -22,6 +42,8 @@ window.TopBarComponent = React.createClass({
           </div>
         </div>
         <div className="timer-bar">
+          <div className="filled timerbar-length" style={timerBarFilledStyle}></div>
+          <div className="unfilled timerbar-length"></div>
         </div>
       </div>
     );
