@@ -6,7 +6,7 @@ from utils import cron as c
 from utils import db
 from utils import video
 from flask_socketio import SocketIO
-from websockets import websockets
+dsfrom websockets import websockets
 
 parser = argparse.ArgumentParser(description='strawberri server')
 parser.add_argument('-c', '--cron', action='store_true', help='runs cron')
@@ -63,7 +63,7 @@ def createChannel():
     error = [
         {
             "error": True,
-            "data": "Could not create channel"
+            "data": "Could not create channel (try a better channel name)"
         }
     ]
     channel_name = request.form.get('channel_name')
