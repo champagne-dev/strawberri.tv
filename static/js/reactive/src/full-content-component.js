@@ -3,6 +3,7 @@ window.FullContentComponent = React.createClass({
     invisible: React.PropTypes.bool.isRequired,
     channels: React.PropTypes.object.isRequired,
     current_channel: React.PropTypes.object.isRequired,
+    current_url_index: React.PropTypes.number.isRequired,
   },
   getInitialState: function(){
     return {"fullChannelsInvisible":true, "createChannelInvisible": true, "topBarInvisible": true, "visibleElementsPushed": false}
@@ -40,7 +41,7 @@ window.FullContentComponent = React.createClass({
         <TopBarComponent invisible={this.state.topBarInvisible} onMouseEnter={this.__topBarMouseEnter} onMouseLeave={this.__topBarMouseLeave} onLeftChannel={this.__onLeftChannel} onRightChannel={this.__onRightChannel} onChannelClick={this.__onChannelClick} onCreateChannel={this.__onCreateChannel} current_channel={this.props.current_channel}/>
         <PersonCountComponent pushed={this.state.visibleElementsPushed}/>
         <SocialComponent pushed={this.state.visibleElementsPushed}/>
-        <VideoComponent />
+        <VideoComponent  current_channel={this.props.current_channel} current_url_index={this.props.current_url_index}/>
       </div>
     );
   },
