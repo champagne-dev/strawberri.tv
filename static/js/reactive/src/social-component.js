@@ -21,7 +21,7 @@ window.SocialComponent = React.createClass({
   	var specialClassName = this.props.pushed ? " pushed" : "";
     return (
       <div className={"social" + specialClassName} >
-        <i className="fa fa-share-alt"></i>
+        <i className="fa fa-pencil-square-o"></i>
       </div>
     );
   },
