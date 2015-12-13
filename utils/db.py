@@ -1,7 +1,9 @@
 import time, sys
+import pushURL
 from pymongo import MongoClient
 from configs import config
 from utils import video
+
 host = config.db["host"]
 port = config.db["port"]
 database_name = config.db["dbname"]
@@ -43,7 +45,7 @@ def create_channel(channel_name):
 		"hashtag": getHashtag(channel_name),
 		"query_string": video.build_query_string(channel_name),
 		"urls": ['','','','','','','','','','','','','','','','','','','',''],
-		"created_date": time.time(),
+		"created_date": int(round(time.time() * 1000)),
 		"index": ch_count,
 		"video_start": 0,
 		"page": 1,
@@ -53,7 +55,16 @@ def create_channel(channel_name):
 	}
 
 	try:
+		t = int(round(time.time() * 1000))
+		url = video.get_url(channel["query_string"], 1, 0)
+		channel["url_timestamps"].pop()
+		channel["url_timestamps"].append(t)
+		channel["urls"].pop()
+		channel["urls"].append(url[0])
+		channel["video_start"] = t
+		
 		channel_id = db.channels.insert_one(channel).inserted_id
+
 		print str(channel_id)+" created"
 		return True
 	except Exception as e:

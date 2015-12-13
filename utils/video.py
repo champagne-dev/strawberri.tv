@@ -103,6 +103,7 @@ def get_url(query_string, page, index):
 		print randomEngine
 		f = FetchURL(randomEngine, index, document)
 		url = f.get_url()
+		print url
 		return [url, google]
 	except Exception as e:
 		print e
