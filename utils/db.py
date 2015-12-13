@@ -63,7 +63,7 @@ def create_channel(channel_name):
 	sys.stdout.flush()
 
 def channel_push_url(channel_name, url, new_page, google_next):
-	t = time.time()
+	t = int(round(time.time() * 1000))
 	print url
 
 	query = {
