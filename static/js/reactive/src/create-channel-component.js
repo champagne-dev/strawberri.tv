@@ -11,7 +11,12 @@ window.CreateChannelComponent = React.createClass({
   },
   __onSubmit: function(){
     STRAWBERRI.ajax.createChannel(this.state.channel_name, function(data){
-      location.reload();
+      console.log(data)
+      if (data.results[0].error) {
+        document.getElementById("createFormErrorMessage").innerText = data.results[0].data;
+      } else {
+        location.reload()
+      }
     })
   },
   render: function() {
@@ -20,6 +25,7 @@ window.CreateChannelComponent = React.createClass({
       <div className={"create-channel" + specialClassName}>
         <div className="create-form">
           <p className="header">Create Channel</p>
+          <label id="createFormErrorMessage"></label>
           <input className="channel-name" value={this.state.channel_name} onChange={this.__handleInputChange} ></input>
           <a className="submit-btn" onClick={this.__onSubmit}>SUBMIT</a>
         </div>

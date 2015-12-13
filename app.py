@@ -6,7 +6,7 @@ from utils import cron as c
 from utils import db
 from utils import video
 from flask_socketio import SocketIO
-dsfrom websockets import websockets
+from websockets import websockets
 
 parser = argparse.ArgumentParser(description='strawberri server')
 parser.add_argument('-c', '--cron', action='store_true', help='runs cron')

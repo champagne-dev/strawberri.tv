@@ -89,3 +89,8 @@ F76F6F
 	font-family: billy;
 
 }
+#createFormErrorMessage {
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color: #FF4E50;
+	font-size: 25px;
+}
