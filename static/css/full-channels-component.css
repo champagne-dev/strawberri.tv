@@ -14,11 +14,12 @@
 	top: -100%;
 }
 .full-channels > .close{
-	font-size: 25px;
-	right: 10px;
-	top: 10px;
-	width: 25px;
-	height: 25px;
+	background: url(../img/exit_thin.png) no-repeat;
+	background-size: contain;
+	right: 20px;
+	top: 20px;
+	width: 45px;
+	height: 45px;
 	position: absolute;
 	cursor: pointer;
 }
@@ -51,6 +52,7 @@
 	height: 50px;
 	margin-right: 0;
 	font-size: 35px;
+	outline: none;
 }
 .full-channels > .channels-content > div.search-form > a.submit-btn{
 	display: inline-block;

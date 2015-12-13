@@ -45,7 +45,7 @@ window.FullChannelsComponent = React.createClass({
     }
     return (
       <div className={"full-channels"+specialClassName}>
-        <div className="close fa fa-times" onClick={this.props.onClose}>
+        <div className="close" onClick={this.props.onClose}>
         </div>
         <div className="channels-content">
           <h4 className="current-channel">{this.props.current_channel.channel_name}</h4>
