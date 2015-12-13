@@ -62,7 +62,8 @@ def create_channel(channel_name):
 		channel["urls"].pop()
 		channel["urls"].append(url[0])
 		channel["video_start"] = t
-		
+		if url[1] == True:
+			channel["pageIndex"] = 1
 		channel_id = db.channels.insert_one(channel).inserted_id
 
 		print str(channel_id)+" created"
