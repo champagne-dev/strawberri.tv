@@ -19,7 +19,6 @@ window.TopBarComponent = React.createClass({
       var timefromstart = currenttime - self.state.fakeStart; // how far are we from the start
       var percent = (timefromstart/(self.state.end-self.state.fakeStart)) * 100; // how big is that compared to total channel time
       self.setState({"timerpercent": percent});
-      console.log(percent);
       self._tickTock();
     }, 1000)
   },
