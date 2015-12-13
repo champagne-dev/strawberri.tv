@@ -57,6 +57,8 @@ def create_channel(channel_name):
 	try:
 		t = int(round(time.time() * 1000))
 		url = video.get_url(channel["query_string"], 1, 0)
+		if url == False:
+			return False
 		channel["url_timestamps"].pop()
 		channel["url_timestamps"].append(t)
 		channel["urls"].pop()

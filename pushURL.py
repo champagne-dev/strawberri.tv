@@ -12,13 +12,15 @@ def get_url_jawn(query_string, channel, channel_push_url):
 
 		print url
 		print channel["channel_name"]+" "+str(url[0])
-		if url[1]:
-			google_next = True
-		else:
-			google_next = False
-		
-		channel_push_url(channel["channel_name"], url[0], new_page, google_next)
-		
+		try: 
+			if url[1]:
+				google_next = True
+			else:
+				google_next = False
+			
+			channel_push_url(channel["channel_name"], url[0], new_page, google_next)
+		except:
+			return False
 def run():
 	try:
 		all_channels = db.find_all_channels()
@@ -27,7 +29,10 @@ def run():
 		for channel in all_channels:
 			query_string = channel["query_string"]
 
-			get_url_jawn(query_string, channel, db.channel_push_url)
+			url = get_url_jawn(query_string, channel, db.channel_push_url)
+			if url == False:
+				channel["pageIndex"] += 1
+				get_url_jawn(query_string, channel, db.channel_push_url)
 
 	except Exception as e:
 		print e
