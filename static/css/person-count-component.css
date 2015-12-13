@@ -5,13 +5,17 @@
 	background: url(../img/strawberri_3_red.png) no-repeat;
 	background-size: contain;
 	left: 50px;
-	top: 50px;
+	top: 75px;
 	-webkit-transition: top .2s ease-in-out;
 	-moz-transition: top .2s ease-in-out;
 	-o-transition: top .2s ease-in-out;
 	transition: top .2s ease-in-out;
 	z-index: 2;
 	opacity: .3;
+}
+.person-count:hover {
+	opacity: 1;
+	cursor: pointer;
 }
 .person-count.pushed{
 	top: 125px;
