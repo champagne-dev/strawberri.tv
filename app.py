@@ -2,6 +2,7 @@ import sys, os
 
 try :
     if os.environ["start"] == "1":
+        print "exit"
         sys.exit(0)
     else:
         os.environ["start"] = "1"
