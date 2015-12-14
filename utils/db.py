@@ -1,5 +1,4 @@
 import time, sys
-import pushURL
 from pymongo import MongoClient
 from configs import config
 from utils import video
