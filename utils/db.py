@@ -6,16 +6,16 @@ from utils import video
 
 host = config.db["host"]
 port = config.db["port"]
-database_name = config.db["dbname"]
 
 if config.db["full_url"]:
 	mongo_url = config.db["full_url"]
+	database_name = mongo_url.split("/").pop()
 else:
 	mongo_url = 'mongodb://'+host+':'+port+'/'
+	database_name = config.db["dbname"]
 
 client = MongoClient(mongo_url)
-
-db = client
+db = client[database_name]
 
 def getHashtag(channel_name):
 	hashtag = ""
