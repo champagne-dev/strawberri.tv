@@ -4,9 +4,9 @@ try:
 	full_url = os.environ['MONGOLAB_URI']
 except KeyError:
 	full_url = None
-	
+
 try:
-	port = os.environ['PORT']
+	port = int(os.environ['PORT'])
 	print port
 except KeyError:
 	port = 80
