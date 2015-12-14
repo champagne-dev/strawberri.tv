@@ -111,10 +111,11 @@ def all_exception_handler(error):
 if __name__ == "__main__":
     args = parser.parse_args()
     cwd = os.path.dirname(os.path.realpath(__file__))
-    
+    print db.find_all_channels().count()
     if db.find_all_channels().count() < 1:
         print "OOOOOOOOOKKKKKKK"
-        sys.stdout.flush()
+    
+    sys.stdout.flush()
         db.init_channels()
 
     if args.cron:
