@@ -5,7 +5,6 @@ F76F6F
   font-family: billy;
   src: url(../fonts/billy.ttf);
 }
-
 .create-channel{
 	box-sizing: border-box;
 	moz-box-sizing: border-box;
@@ -70,7 +69,6 @@ F76F6F
 	cursor: pointer;
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	font-family: billy;
-
 }
 .create-channel > .create-form > .submit-btn:hover{
 	background-color: rgb(63, 250, 84);
