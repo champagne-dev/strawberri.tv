@@ -1,15 +1,4 @@
-import sys, os
-
-try :
-    print os.environ["start"]
-    if os.environ["start"] == "1":
-        print "exit"
-        sys.exit(0)
-except:
-    os.environ["start"] = "1"
-
-print "run"
-import json, os, atexit, random, argparse
+import json, os, sys, atexit, random, argparse
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from bson.json_util import dumps
 from configs import config
@@ -123,21 +112,21 @@ if db.find_all_channels().count() < 1:
     db.init_channels()
 
 if __name__ == "__main__":
-    args = parser.parse_args()
-    if args.cron:
-        def close_handler():
-            c.exit()
+    # args = parser.parse_args()
+    # if args.cron:
+    #     def close_handler():
+    #         c.exit()
 
-        atexit.register(close_handler)
-        cwd = os.path.dirname(os.path.realpath(__file__))
-        c.run(cwd+"/pushURL.py", False)
+    #     atexit.register(close_handler)
+    #     cwd = os.path.dirname(os.path.realpath(__file__))
+    #     c.run(cwd+"/pushURL.py", False)
 
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
-else:
-    try:
-        socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
-    except Exception as e:
-        print e
+# else:
+#     try:
+#         socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
+#     except Exception as e:
+#         print e
 
 # else:
 #     cwd = os.path.dirname(os.path.realpath(__file__))
