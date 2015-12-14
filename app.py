@@ -3,10 +3,12 @@ import sys, os
 try :
     if os.environ["start"] == "1":
         sys.exit(0)
+    else:
+        os.environ["start"] = "1"
 except:
-    print "run"
     os.environ["start"] = "1"
 
+print "run"
 import json, os, atexit, random, argparse
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from bson.json_util import dumps
