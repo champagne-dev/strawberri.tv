@@ -113,6 +113,8 @@ if __name__ == "__main__":
     cwd = os.path.dirname(os.path.realpath(__file__))
     
     if db.find_all_channels().count() < 1:
+        print "OOOOOOOOOKKKKKKK"
+        sys.stdout.flush()
         db.init_channels()
 
     if args.cron:
