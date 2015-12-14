@@ -61,5 +61,5 @@ docs/_build/
 target/
 
 node_modules/
-
+configs/config_local.py
 .DS_Store

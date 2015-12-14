@@ -8,7 +8,12 @@ host = config.db["host"]
 port = config.db["port"]
 database_name = config.db["dbname"]
 
-client = MongoClient('mongodb://'+host+':'+port+'/')
+if config.db["full_url"]:
+	mongo_url = config.db["full_url"]
+else:
+	mongo_url = 'mongodb://'+host+':'+port+'/'
+
+client = MongoClient(mongo_url)
 
 db = client[database_name]
 
