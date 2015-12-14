@@ -34,6 +34,3 @@ STRAWBERRI.ws = {
 		},
 	}
 };
-STRAWBERRI.ws.messaging.onNewMessage(function(data){
-	console.log(data);
-});
