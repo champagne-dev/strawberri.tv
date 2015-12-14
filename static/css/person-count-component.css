@@ -1,7 +1,9 @@
 .person-count{
 	position: absolute;
-	width: 35px;
+	width: 65px;
 	height: 35px;
+	padding-left: 40px;
+	padding-top: 10px;
 	background: url(../img/strawberri_3_red.png) no-repeat;
 	background-size: contain;
 	left: 50px;
@@ -17,7 +19,16 @@
 	opacity: 1;
 	cursor: pointer;
 }
+.person-count:hover .count-number, .person-count.pushed .count-number{
+	opacity: 1;
+}
 .person-count.pushed{
 	top: 125px;
 	opacity: 1;
+}
+.count-number {
+	font-size: 25px;
+	opacity: .8;
+	color: #fff;
+	font-family: sans-serif;
 }

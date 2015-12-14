@@ -18,7 +18,7 @@ window.PersonCountComponent = React.createClass({
   	var specialClassName = this.props.pushed ? " pushed" : "";
     return (
       <div className={"person-count" + specialClassName} >
-        {this.state.count}
+        <label className="count-number">{this.state.count}</label>
       </div>
     );
   },

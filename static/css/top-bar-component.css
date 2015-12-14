@@ -79,7 +79,7 @@
 .top-bar > .timer-bar > .filled{
 	z-index: 2;
 	width: 0;
-	background-color: green;
+	background-color: rgb(63, 220, 84);
 	-webkit-transition: width .2s linear;
 	-moz-transition: width .2s linear;
 	-o-transition: width .2s linear;
@@ -88,5 +88,5 @@
 .top-bar > .timer-bar > .unfilled{
 	z-index: 1;
 	width: 100%;
-	background-color: red;
+	background-color: rgba(255,255,255,.3);
 }
