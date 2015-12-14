@@ -87,7 +87,9 @@ def createChannel():
             ]
             return jsonify(results=error)
 
-        if db.create_channel(channel_name):
+        results = db.create_channel(channel_name)
+        if results:
+            success[0]["hashtag"] = results["hashtag"]
             return jsonify(results=success)
         else:
             return jsonify(results=error)

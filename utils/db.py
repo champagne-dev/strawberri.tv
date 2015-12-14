@@ -69,7 +69,7 @@ def create_channel(channel_name):
 		channel_id = db.channels.insert_one(channel).inserted_id
 
 		print str(channel_id)+" created"
-		return True
+		return channel
 	except Exception as e:
 		print e
 		return False

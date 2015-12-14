@@ -17,11 +17,16 @@ window.FullContentComponent = React.createClass({
   __onLeftChannel: function(){
     if(this.props.current_channel.index != 0)
       window.location.href = "/?c=" + this.props.channels[this.props.current_channel.index-1]["hashtag"] + "&switch=true";
+    else {
+      window.location.href = "/?c=" + this.props.channels[Object.size(this.props.channels)-1]["hashtag"] + "&switch=true";      
+    }
   },
   __onRightChannel: function(){
-    console.log(this.props.current_channel.index);
-    if(this.props.current_channel.index >= Object.size(this.props.channels.length))
-      window.location.href = "/?c=" + this.props.channels[this.props.current_channel.index+1]["hashtag"] + "&switch=true";
+    if(this.props.current_channel.index >= Object.size(this.props.channels)-1)
+      window.location.href = "/?c=" + this.props.channels[0]["hashtag"] + "&switch=true";  
+    else {
+      window.location.href = "/?c=" + this.props.channels[this.props.current_channel.index+1]["hashtag"] + "&switch=true";          
+    }
   },
   __onChannelClick: function(){
     this.setState({"fullChannelsInvisible": false, "createChannelInvisible": true, "topBarInvisible": true, "visibleElementsPushed": false})

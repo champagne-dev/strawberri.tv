@@ -9,7 +9,7 @@ var MainComponent = React.createClass({
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
   },
   getStyle: function(){
-    var colors = ["#0D6759", "#69D2E7", "#F38630", "#CBE86B", "#91204D", "#FFE545", "#FA2A00", "#0B486B", "#FE4365", "#413D3D"];
+    var colors = ["#0D6759", "#69D2E7", "#F38630", "#CBE86B", "#91204D", "#EEE545", "#E6481E", "#0B486B", "#FE4365", "#413D3D" ];
     return { backgroundColor: colors[Math.floor(Math.random() * colors.length)]};
   },
   getInitialState: function(){

@@ -15,7 +15,7 @@ window.CreateChannelComponent = React.createClass({
       if (data.results[0].error) {
         document.getElementById("createFormErrorMessage").innerText = data.results[0].data;
       } else {
-        location.reload()
+        window.location = "/?c="+data.results[0].hashtag;
       }
     })
   },

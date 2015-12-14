@@ -66,7 +66,14 @@
 	padding-top: 12px;
 	color: white;
 	font-size: 25px;
-	background-color:rgb(85,156,234);
+	background-color: #FF4E50;
+}
+.full-channels > .channels-content > div.search-form > a.submit-btn:hover{
+	opacity: .8;
+	-webkit-transition: opacity .1s ease-in-out;
+	-moz-transition: opacity .1s ease-in-out;
+	-o-transition: opacity .1s ease-in-out;
+	transition: opacity .1s ease-in-out;
 }
 .full-channels > .channels-content > h4.other-channels{
 	display: block;

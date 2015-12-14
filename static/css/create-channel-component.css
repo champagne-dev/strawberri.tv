@@ -65,17 +65,17 @@ F76F6F
 	padding-top: 20px;
 	font-size: 55px;
 	color: white;
-	background-color: rgb(63, 220, 84);
+	background-color: #FF4E50;
 	cursor: pointer;
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	font-family: billy;
 }
 .create-channel > .create-form > .submit-btn:hover{
-	background-color: rgb(63, 250, 84);
-	-webkit-transition: background-color .1s ease-in-out;
-	-moz-transition: background-color .1s ease-in-out;
-	-o-transition: background-color .1s ease-in-out;
-	transition: background-color .1s ease-in-out;
+	opacity: .8;
+	-webkit-transition: opacity .1s ease-in-out;
+	-moz-transition: opacity .1s ease-in-out;
+	-o-transition: opacity .1s ease-in-out;
+	transition: opacity .1s ease-in-out;
 }
 .create-channel > .create-form > p.header{
 	text-align: center;
