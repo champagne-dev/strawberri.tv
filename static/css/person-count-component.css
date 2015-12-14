@@ -15,6 +15,13 @@
 	z-index: 2;
 	opacity: .3;
 }
+.person-count > h4.count-text{
+	text-align: center;
+    top: -9px;
+    left: -1px;
+    position: relative;
+    color: white;
+}
 .person-count:hover {
 	opacity: 1;
 	cursor: pointer;
