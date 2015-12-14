@@ -1,4 +1,12 @@
-import json, os, atexit, sys, random, argparse
+import sys, os
+
+try :
+    if os.environ["start"] == "1":
+        sys.exit(0)
+except:
+    os.environ["start"] = "1"
+    
+import json, os, atexit, random, argparse
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from bson.json_util import dumps
 from configs import config
