@@ -7,7 +7,7 @@ window.TopBarComponent = React.createClass({
     onRightChannel: React.PropTypes.func.isRequired,
     onChannelClick: React.PropTypes.func.isRequired,
     onCreateChannel: React.PropTypes.func.isRequired,
-    current_channel: React.PropTypes.object.isRequired,
+    current_channel: React.PropTypes.object.isRequired
   },
   getInitialState: function(){
     return {"timerpercent": 0, "fakeStart": 0, "end": 0}
@@ -30,11 +30,12 @@ window.TopBarComponent = React.createClass({
     this._tickTock();
   },
   render: function() {
+    var style = STRAWBERRI.data.mainStyle;
   	var specialClassName = this.props.invisible ? " hidden" : "";
     var timerBarFilledStyle = { width: this.state.timerpercent+"%"};
     return (
-      <div className={"top-bar" + specialClassName} onMouseEnter={this.props.onMouseEnter} onMouseLeave={this.props.onMouseLeave} >
-        <div className="full-bar">
+      <div className={"top-bar" + specialClassName}  onMouseEnter={this.props.onMouseEnter} onMouseLeave={this.props.onMouseLeave} >
+        <div className="full-bar" style={style}>
           <div className="channels">
             <a className="create-btn child" onClick={this.props.onCreateChannel}><i className="fa fa-plus"></i></a>
             <a className="left arrow child" onClick={this.props.onLeftChannel}><i className="fa fa-chevron-left"></i></a>

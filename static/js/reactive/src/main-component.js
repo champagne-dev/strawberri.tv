@@ -4,14 +4,31 @@ var MainComponent = React.createClass({
     current_channel: React.PropTypes.object.isRequired,
     current_url_index: React.PropTypes.number.isRequired,
   },
+  getParamByName: function(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+  },
+  getStyle: function(){
+    var colors = ["#0D6759", "#69D2E7", "#F38630", "#CBE86B", "#91204D", "#FFE545", "#FA2A00", "#0B486B", "#FE4365", "#413D3D"];
+    return { backgroundColor: colors[Math.floor(Math.random() * colors.length)]};
+  },
   getInitialState: function(){
-  	return {"splashPageInvisible": false, "fullContentInvisible": true}
+    if (this.getParamByName("switch") != "true") {
+  	  return {"splashPageInvisible": false, "fullContentInvisible": true};
+    } else {
+      return {"splashPageInvisible": true, "fullContentInvisible": false};
+    }
   },
   componentDidMount: function(){
     var self = this;
-    setTimeout(function(){
-      self.setState({"splashPageInvisible": true, "fullContentInvisible": false})
-    }, 500);
+    var style = this.getStyle();
+    STRAWBERRI.data.mainStyle = style;
+    if (this.getParamByName("switch") != "true") {
+      setTimeout(function(){
+        self.setState({"splashPageInvisible": true, "fullContentInvisible": false});
+      }, 500);
+    } 
+    
   },
   render: function() {
     return (
