@@ -1,4 +1,4 @@
-import eventlet, sys
+import sys
 from flask_socketio import join_room, leave_room, emit, rooms
 from flask import request
 from werkzeug.contrib.cache import SimpleCache
