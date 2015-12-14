@@ -2,7 +2,7 @@
 	position: absolute;
 	width: 35px;
 	height: 35px;
-	background: url(../img/strawberri_3_red.png) no-repeat;
+	background: url(../img/strawberri_3_red.png) no-repeat center center;
 	background-size: contain;
 	left: 50px;
 	top: 75px;
@@ -12,6 +12,13 @@
 	transition: top .2s ease-in-out;
 	z-index: 2;
 	opacity: .3;
+}
+.person-count > h4.count-text{
+	text-align: center;
+    top: -9px;
+    left: -1px;
+    position: relative;
+    color: white;
 }
 .person-count:hover {
 	opacity: 1;

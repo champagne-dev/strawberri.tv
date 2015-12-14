@@ -7,10 +7,7 @@ window.PersonCountComponent = React.createClass({
   },
   componentDidMount: function(){
     var self = this;
-    window.socket.on('userJoined', function(data){
-      self.setState({"count":data.count})
-    });
-    window.socket.on('userLeft', function(data){
+    STRAWBERRI.ws.peoplecounter.onUpdatePersonCount(function(data){
       self.setState({"count":data.count})
     });
   },
@@ -18,7 +15,7 @@ window.PersonCountComponent = React.createClass({
   	var specialClassName = this.props.pushed ? " pushed" : "";
     return (
       <div className={"person-count" + specialClassName} >
-        {this.state.count}
+        <h4 className="count-text">{this.state.count}</h4>
       </div>
     );
   },
