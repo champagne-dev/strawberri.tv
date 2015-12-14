@@ -118,7 +118,9 @@ if __name__ == "__main__":
         cwd = os.path.dirname(os.path.realpath(__file__))
         c.run(cwd+"/pushURL.py", False)
 
-socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
+    socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
+else:
+    socketio.run(app, debug=config.server["debug"])
 
 # else:
 #     cwd = os.path.dirname(os.path.realpath(__file__))
