@@ -9,7 +9,7 @@ port = config.db["port"]
 
 if config.db["full_url"]:
 	mongo_url = config.db["full_url"]
-	database_name = mongo_url.split("/").pop()
+	database_name = mongo_url.split("/").pop().split("?")[0]
 else:
 	mongo_url = 'mongodb://'+host+':'+port+'/'
 	database_name = config.db["dbname"]
