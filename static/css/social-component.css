@@ -95,12 +95,24 @@
 	z-index: 3;
 }
 .social-message {
+	top: 0px;
 	width: inherit;
 	background-color: #eee;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	padding: 10px;
 	margin: 10px;
+	opacity: 1;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+.social-message.hidden {
+	opacity: 0;
+}
+.social-message.disabled {
+	display: none;
 }
 .social-message .message {
 	font-family: sans-serif;
