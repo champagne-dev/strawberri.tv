@@ -5,8 +5,6 @@ try :
     if os.environ["start"] == "1":
         print "exit"
         sys.exit(0)
-    else:
-        os.environ["start"] = "1"
 except:
     os.environ["start"] = "1"
 
@@ -133,7 +131,7 @@ if __name__ == "__main__":
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
 else:
     try:
-        socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
+        socketio.run(app, debug=config.server["debug"], host=config.server["host"], 80)
     except Exception as e:
         print e
 
