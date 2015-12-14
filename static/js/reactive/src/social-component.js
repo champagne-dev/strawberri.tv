@@ -33,6 +33,8 @@ window.SocialComponent = React.createClass({
     STRAWBERRI.ws.messaging.onNewMessage(function(data){
       var current_queue = self.state.message_queue;
       current_queue.push({"message":data.message, "author": data.author, "index": self.state.current_queue_index})
+      if(current_queue.length >= 10)
+        current_queue.shift();
       self.setState({"message_queue":current_queue,"current_queue_index":self.state.current_queue_index+1})
     });
   },
