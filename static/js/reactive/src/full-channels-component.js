@@ -8,12 +8,16 @@ var IndividualChannelComponent = React.createClass({
   getInitialState: function(){
     return {"backgroundColor":"rgb("+parseInt(Math.random()*255)+","+parseInt(Math.random()*255)+","+parseInt(Math.random()*255)+")"}
   },
+  __onClickChannel: function(){
+    console.log(window.location.host + "/?c=" + this.props.hashtag)
+    window.location.href = "/?c=" + this.props.hashtag;
+  },
   render: function() {
     var specialClassName = this.props.invisible ? " hidden" : "";
     var style = {};
     style["backgroundColor"] = this.state.backgroundColor;
     return (
-      <div className={"individual-channel"+specialClassName} style={style}>
+      <div className={"individual-channel"+specialClassName} style={style} onClick={this.__onClickChannel}>
         {this.props.name}
       </div>
     );

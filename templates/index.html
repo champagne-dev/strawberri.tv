@@ -24,8 +24,16 @@
 			STRAWBERRI = {};
 			STRAWBERRI.data = {}
 			STRAWBERRI.data.channels = JSON.parse('{{ channels|safe }}');
-			STRAWBERRI.data.current_channel = JSON.parse('{{ current_channel|safe }}')
+			STRAWBERRI.data.current_channel = JSON.parse('{{ current_channel|safe }}');
 			STRAWBERRI.data.current_url_index = parseInt('{{ current_url_index }}');
+			STRAWBERRI.playerInstance = jwplayer('jwplayer-container');
+			Object.size = function(obj) {
+			    var size = 0, key;
+			    for (key in obj) {
+			        if (obj.hasOwnProperty(key)) size++;
+			    }
+			    return size;
+			};
 		</script>
 		<script type="text/jsx" src="{{ url_for('static', filename='js/utils/strawberri-ajax.js') }}"></script>
 		<script type="text/jsx" src="{{ url_for('static', filename='js/utils/strawberri-ws.js') }}"></script>

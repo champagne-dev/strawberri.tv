@@ -19,11 +19,13 @@ window.TopBarComponent = React.createClass({
       var timefromstart = currenttime - self.state.fakeStart; // how far are we from the start
       var percent = (timefromstart/(self.state.end-self.state.fakeStart)) * 100; // how big is that compared to total channel time
       self.setState({"timerpercent": percent});
+      if(percent >= 100)
+        self.setState({"fakeStart":currenttime, "end": currenttime+(1000*60*5)});
       self._tickTock();
     }, 1000)
   },
   componentDidMount: function(){
-    var fakeStart = 1450045753923; // Replace with start timestamp from current_channel object
+    var fakeStart = this.props.current_channel.video_start; // Replace with start timestamp from current_channel object
     this.setState({"fakeStart":fakeStart, "end": fakeStart+(1000*60*5)}) // 5 minutes = (millis * seconds * minutes)
     this._tickTock();
   },
