@@ -120,7 +120,7 @@ if __name__ == "__main__":
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
 else:
     try:
-        socketio.run(app, debug=config.server["debug"])
+        socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
     except Exception as e:
         print e
 
