@@ -7,7 +7,6 @@ except KeyError:
 
 try:
 	port = int(os.environ['PORT'])
-	print port
 except KeyError:
 	port = 80
 

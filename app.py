@@ -1,19 +1,20 @@
-import json, os, atexit, sys, random, argparse
+import json, os, atexit, sys, random, argparse, eventlet 
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from bson.json_util import dumps
 from configs import config
 from utils import cron as c
 from utils import db
 from utils import video
-from flask_socketio import SocketIO
-from websockets import websockets
+from flask_socketio import SocketIO, join_room, leave_room, emit, rooms
+from werkzeug.contrib.cache import SimpleCache
+cache = SimpleCache()
 
 parser = argparse.ArgumentParser(description='strawberri server')
 parser.add_argument('-c', '--cron', action='store_true', help='runs cron')
 
 app = Flask(__name__, static_url_path='/static/')
 socketio = SocketIO(app)
-websockets(socketio)
+
 success = [
     {
         "error": False,
@@ -108,6 +109,47 @@ def all_exception_handler(error):
     print error
     return render_template("error.html", error_message="Wrong page boi")
 
+
+
+@socketio.on('joinChannel')
+def handle_join(data):
+    room = data['channel_name']
+    # print "CONNECT to " + room
+    join_room(room)
+    cache.set(request.sid+"-room", room)
+    count = cache.get(room+":count")
+    if count is None:
+        person_count = 0
+    else:
+        person_count = int(count)
+
+    cache.set(room+":count", person_count+1)
+
+    emit('userJoined', {"count": cache.get(room+":count")}, broadcast=True, room=room)
+
+@socketio.on('disconnect')
+def handle_leave():
+    room = cache.get(request.sid+"-room")
+    # print "DISCONNECT from " + room
+    leave_room(room)
+    count = cache.get(room+":count")
+    if count is not None:
+        person_count = int(cache.get(room+":count"))
+        cache.set(room+":count", int(person_count)-1)
+
+    emit('userLeft', {"count": cache.get(room+":count")}, broadcast=True, room=room)
+
+@socketio.on('newmessage')
+def handle_new_message(data):
+    room = cache.get(request.sid+"-room")
+    # print "NEW MESSAGE from " + room
+    emit('newmessage', data, broadcast=True, room=room)
+
+@socketio.on_error()
+def error_handler(e):
+    print e
+    sys.stdout.flush()
+    
 if db.find_all_channels().count() < 1:
     db.init_channels()
 
@@ -120,7 +162,7 @@ if __name__ == "__main__":
         atexit.register(close_handler)
         cwd = os.path.dirname(os.path.realpath(__file__))
         c.run(cwd+"/pushURL.py", False)
-        
+
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
 else:
     socketio.run(app, debug=config.server["debug"])
