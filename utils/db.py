@@ -15,7 +15,7 @@ else:
 
 client = MongoClient(mongo_url)
 
-db = client[database_name]
+db = client
 
 def getHashtag(channel_name):
 	hashtag = ""
