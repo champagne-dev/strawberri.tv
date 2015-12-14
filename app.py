@@ -114,9 +114,9 @@ if __name__ == "__main__":
     print db.find_all_channels().count()
     if db.find_all_channels().count() < 1:
         print "OOOOOOOOOKKKKKKK"
-    
-    sys.stdout.flush()
         db.init_channels()
+    sys.stdout.flush()
+        
 
     if args.cron:
         def close_handler():
