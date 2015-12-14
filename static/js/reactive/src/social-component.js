@@ -3,6 +3,9 @@ var SocialMessageComponent = React.createClass({
     var self = this;
     setTimeout(function(){
       self.setState({"invisible": true})
+      setTimeout(function(){
+        self.setState({"disabled": true})
+      }, 1000)
     }, 3000)
   },
   propTypes: {
@@ -12,12 +15,13 @@ var SocialMessageComponent = React.createClass({
     index: React.PropTypes.number.isRequired,
   },
   getInitialState: function(){
-    return {"invisible":this.props.invisible}
+    return {"invisible":this.props.invisible, "disabled": false}
   },
   render: function(){
-    var specialClassName = this.state.invisible ? " hidden" : ""
+    var specialClassName = this.state.invisible ? " hidden " : " "
+    var disabledClassName = this.state.disabled ? " disabled" : ""
     return (
-        <div id={this.props.index} className={"social-message" + specialClassName}>
+        <div id={this.props.index} className={"social-message" + specialClassName + disabledClassName}>
           <h3 className="message">{this.props.message}</h3>
           <h4 className="author">{this.props.author}</h4>
         </div>
