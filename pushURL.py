@@ -1,5 +1,6 @@
 import sys, os
 from utils import video
+from utils import db
 
 def get_url_jawn(query_string, channel, channel_push_url):
 	url = video.get_url(query_string, channel["page"], channel["pageIndex"])
@@ -27,6 +28,7 @@ def run():
 		if all_channels.count() <= 0:
 			print "No Channels Exist"
 		for channel in all_channels:
+			print channel["channel_name"]
 			query_string = channel["query_string"]
 
 			url = get_url_jawn(query_string, channel, db.channel_push_url)

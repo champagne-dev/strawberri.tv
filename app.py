@@ -117,9 +117,9 @@ if __name__ == "__main__":
         atexit.register(close_handler)
         cwd = os.path.dirname(os.path.realpath(__file__))
         c.run(cwd+"/pushURL.py", False)
-else:
-    cwd = os.path.dirname(os.path.realpath(__file__))
-    c.run(cwd+"/pushURL.py", False)
+# else:
+#     cwd = os.path.dirname(os.path.realpath(__file__))
+#     c.run(cwd+"/pushURL.py", False)
     
 if db.find_all_channels().count() < 1:
     db.init_channels()
