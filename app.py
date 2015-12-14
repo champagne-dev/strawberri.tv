@@ -8,6 +8,7 @@ from utils import video
 from flask_socketio import SocketIO
 from websockets import websockets
 
+
 parser = argparse.ArgumentParser(description='strawberri server')
 parser.add_argument('-c', '--cron', action='store_true', help='runs cron')
 
@@ -97,11 +98,6 @@ def createChannel():
     except Exception as e:
         print e
         return jsonify(results=error)
-
-
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
 
 @app.errorhandler(Exception)
 def all_exception_handler(error):
