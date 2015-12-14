@@ -55,7 +55,7 @@ def indexView():
             if timestamp == current_channel["video_start"]:
                 current_url_index = i 
 
-        print mapped_channels
+        # print mapped_channels
         return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=dumps(current_channel), current_url_index=current_url_index)
 
 @app.route("/createChannel", methods=["POST"])
@@ -112,6 +112,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     cwd = os.path.dirname(os.path.realpath(__file__))
     
+    if db.find_all_channels().count() < 1:
+        db.init_channels()
+
     if args.cron:
         def close_handler():
             c.exit()

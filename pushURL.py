@@ -10,7 +10,7 @@ def get_url_jawn(query_string, channel, channel_push_url):
 		else:
 			new_page = False
 
-		print url
+		# print url
 		print channel["channel_name"]+" "+str(url[0])
 		try: 
 			if url[1]:

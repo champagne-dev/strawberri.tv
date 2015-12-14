@@ -1,4 +1,5 @@
-var socket = io('localhost:5000');
+var url = window.location.host;
+var socket = io(url);
 socket.on('connect', function (data) {
     socket.emit('joinChannel', { channel_name: STRAWBERRI.data.current_channel.channel_name });
 });

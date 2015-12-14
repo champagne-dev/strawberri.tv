@@ -119,6 +119,13 @@ def channel_push_url(channel_name, url, new_page, google_next):
 		print e
 		return False	
 
+def init_channels():
+	create_channel("cats")
+	create_channel("star wars")
+	create_channel("dj khaled")
+	create_channel("top news")
+	create_channel("DIY")
+
 def channel_push_tweet(channel_name, tweet_object):
 	tweet_string = json.dumps(tweet_object)
 	try:
