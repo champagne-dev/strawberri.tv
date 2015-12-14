@@ -34,3 +34,17 @@ STRAWBERRI.ws = {
 		},
 	}
 };
+setTimeout(function(){
+	setTimeout(function(){
+		STRAWBERRI.ws.messaging.sendNewMessage("Hey my name is carter", "cartthegob")
+		setTimeout(function(){
+			STRAWBERRI.ws.messaging.sendNewMessage("Hey my name is carter", "cartthegob")
+			setTimeout(function(){
+				STRAWBERRI.ws.messaging.sendNewMessage("Hey my name is carter", "cartthegob")
+				setTimeout(function(){
+					STRAWBERRI.ws.messaging.sendNewMessage("Hey my name is carter", "cartthegob")
+				}, 500)
+			}, 500)
+		}, 500)
+	}, 500)
+}, 4000)

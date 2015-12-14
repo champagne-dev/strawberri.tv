@@ -18,8 +18,9 @@ var SocialMessageComponent = React.createClass({
     return {"invisible":this.props.invisible, "disabled": false}
   },
   render: function(){
-    var specialClassName = this.state.invisible ? " hidden " : " "
+    var specialClassName = this.props.invisible ? " disabled " : " "
     var disabledClassName = this.state.disabled ? " disabled" : ""
+    console.log(specialClassName)
     return (
         <div id={this.props.index} className={"social-message" + specialClassName + disabledClassName}>
           <h3 className="message">{this.props.message}</h3>
