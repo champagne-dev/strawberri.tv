@@ -1,2 +1,2 @@
-web: gunicorn --worker-class eventlet app:app --log-file=-
+web: sudo gunicorn --worker-class eventlet app:app --log-file=-
 clock: python clock.py

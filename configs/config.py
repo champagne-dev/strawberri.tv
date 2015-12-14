@@ -5,6 +5,13 @@ try:
 except KeyError:
 	full_url = None
 
+try:
+	port = os.environ['PORT']
+	print port
+	print "^port"
+except KeyError:
+	port = 80
+
 db = dict(
     host         = "0.0.0.0"
 ,   user         = "root"
@@ -24,7 +31,7 @@ redis = dict(
 server = dict(
 	debug				= False
 ,	host 				= "0.0.0.0"
-,	port 				= 80
+,	port 				= port
 )
 
 try:
