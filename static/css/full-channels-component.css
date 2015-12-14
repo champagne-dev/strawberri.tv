@@ -41,6 +41,8 @@
 .full-channels > .channels-content > h4.current-channel{
 	display: inline-block;
 	font-size: 35px;
+	color: #444;
+	margin-bottom: 40px;
 }
 .full-channels > .channels-content > div.search-form{
 	display: block;
@@ -70,15 +72,15 @@
 	display: block;
 	margin: auto;
 	width: 250px;
-	font-size: 25px;
-	margin-top: 15px;
+	font-size: 20px;
 	margin-bottom: 10px;
+	color: #777;
 }
 .full-channels > .channels-content > .all-channels{
 	width: 100%;
-	margin-top: 50px;
+	margin-top: 20px;
 	display: block;
-	height: 200px;
+	height: 70%;
 	overflow-y: auto;
 }
 .full-channels > .channels-content > .all-channels > .individual-channel{
