@@ -108,6 +108,9 @@ def all_exception_handler(error):
     print error
     return render_template("error.html", error_message="Wrong page boi")
 
+if db.find_all_channels().count() < 1:
+    db.init_channels()
+
 if __name__ == "__main__":
     args = parser.parse_args()
     if args.cron:
@@ -117,10 +120,10 @@ if __name__ == "__main__":
         atexit.register(close_handler)
         cwd = os.path.dirname(os.path.realpath(__file__))
         c.run(cwd+"/pushURL.py", False)
-
-if db.find_all_channels().count() < 1:
-    db.init_channels()
-socketio.run(app, debug=config.server["debug"])
+        
+    socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
+else:
+    socketio.run(app, debug=config.server["debug"])
 
 # else:
 #     cwd = os.path.dirname(os.path.realpath(__file__))
