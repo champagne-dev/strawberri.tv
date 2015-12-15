@@ -1,7 +1,7 @@
 import pushURL
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
-sched = BlockingScheduler()
+sched = BackgroundScheduler()
 
 @sched.scheduled_job('interval', minutes=5)
 def timed_job():
