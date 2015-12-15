@@ -32,7 +32,7 @@ oauthlib==1.0.3
 plan==0.5
 prettytable==0.7.2
 pyOpenSSL==0.13
-pymongo==2.8
+pymongo==3.1.0
 pyserial==2.6
 python-apt==0.9.3.5ubuntu1
 python-debian==0.1.21-nmu2ubuntu2
