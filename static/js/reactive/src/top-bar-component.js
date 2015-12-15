@@ -14,14 +14,19 @@ window.TopBarComponent = React.createClass({
   },
   _tickTock: function(){
     var self = this;
+
     setTimeout(function(){
       var currenttime = Date.now();
       var timefromstart = currenttime - self.state.fakeStart; // how far are we from the start
       var percent = (timefromstart/(self.state.end-self.state.fakeStart)) * 100; // how big is that compared to total channel time
       self.setState({"timerpercent": percent});
       if(percent >= 100) {
-         self.setState({"fakeStart":currenttime, "end": currenttime+(1000*60*5)});
-         window.location.reload();
+         if (!STRAWBERRI.data.firstTick) {
+          window.location.reload();
+         } else {
+          self.setState({"fakeStart":currenttime, "end": currenttime+(1000*60*5)});
+          STRAWBERRI.data.firstTick = false;
+         }
       }
        
       self._tickTock();
@@ -30,6 +35,7 @@ window.TopBarComponent = React.createClass({
   componentDidMount: function(){
     var fakeStart = this.props.current_channel.video_start; // Replace with start timestamp from current_channel object
     this.setState({"fakeStart":fakeStart, "end": fakeStart+(1000*60*5)}) // 5 minutes = (millis * seconds * minutes)
+    STRAWBERRI.data.firstTick = true;
     this._tickTock();
   },
   render: function() {
