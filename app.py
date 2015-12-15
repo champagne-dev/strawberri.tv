@@ -110,9 +110,12 @@ def all_exception_handler(error):
 def send_static(path):
     return send_from_directory('static', path)
 
-if db.find_all_channels().count() < 1:
+try:
+    if db.find_all_channels().count() < 1:
+        db.init_channels()
+except:
     db.init_channels()
-
+    
 if __name__ == "__main__":
     # args = parser.parse_args()
     # if args.cron:

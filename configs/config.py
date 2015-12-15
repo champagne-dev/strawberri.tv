@@ -1,9 +1,5 @@
 # Override default config if config_local exists (if we are local).
 import os
-try:
-	full_url = os.environ['MONGOLAB_URI']
-except KeyError:
-	full_url = None
 
 try:
 	port = int(os.environ['PORT'])
@@ -11,12 +7,11 @@ except KeyError:
 	port = 80
 
 db = dict(
-    host         = "0.0.0.0"
+    host         = "localhost"
 ,   user         = "root"
 ,   dbname         = "strawberri"
 ,   pw           = ""
 ,	port 		 = "27017"  # Has to be a string
-,	full_url     = full_url
 )
 
 
