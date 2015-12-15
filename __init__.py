@@ -127,8 +127,6 @@ except:
 if __name__ == "__main__":
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
 
-from clock import run as clock_run
-clock_run()
 # else:
 #     try:
 #         socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
