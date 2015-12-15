@@ -1,4 +1,6 @@
 import json, os, sys, atexit, random, argparse
+if __name__ != "__main__":
+    sys.path.insert(0,"/var/www/strawberri/strawberri")
 from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
 from bson.json_util import dumps
 from configs import config
