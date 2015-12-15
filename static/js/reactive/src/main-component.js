@@ -26,7 +26,7 @@ var MainComponent = React.createClass({
     if (this.getParamByName("switch") != "true") {
       setTimeout(function(){
         self.setState({"splashPageInvisible": true, "fullContentInvisible": false});
-      }, 50000);
+      }, 500);
     } 
     
   },
