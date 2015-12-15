@@ -125,7 +125,8 @@ if __name__ == "__main__":
     #     cwd = os.path.dirname(os.path.realpath(__file__))
     #     c.run(cwd+"/pushURL.py", False)
     socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
-
+    from clock import run as clock_run
+    clock_run()
 # else:
 #     try:
 #         socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])
