@@ -75,7 +75,7 @@
 	border: 1px solid transparent;
 	text-align: center;
 	color: white;
-	background-color: rgb(63, 220, 84);
+	background-color: #FF4E50;
 	font-family: billy;
 }
 .messageForm .sendBtn:hover{
@@ -100,16 +100,13 @@
 	background-color: #eee;
 	border: 1px solid #ccc;
 	border-radius: 3px;
-	padding: 5px 10px;
+	padding: 3px 8px;
 	margin: 10px;
-	opacity: .5;
-	-webkit-transition: all .5s ease-in-out;
-	-moz-transition: all .5s ease-in-out;
-	-o-transition: all .5s ease-in-out;
-	transition: all .5s ease-in-out;
-}
-.social-message:hover {
-	opacity: 1;
+	opacity: .8;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }
 .social-message.hidden {
 	opacity: 0;
@@ -119,6 +116,7 @@
 }
 .social-message .message {
 	font-family: sans-serif;
+	font-family: "Open Sans";
 	font-size: 18px;
 	color: #555;
 }
