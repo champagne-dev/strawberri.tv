@@ -30,36 +30,38 @@ success = [
     
 @app.route("/", methods=["GET"])
 def indexView():
-    channels = db.find_all_channels()
-    mapped_channels = dict()
+    try:
+        channels = db.find_all_channels()
+        mapped_channels = dict()
 
-    for channel in channels:
-        mapped_channels[channel["index"]] = {
-            "channel_name": channel["channel_name"],
-            "hashtag": channel["hashtag"]
-        }  
+        for channel in channels:
+            mapped_channels[channel["index"]] = {
+                "channel_name": channel["channel_name"],
+                "hashtag": channel["hashtag"]
+            }  
 
-    if not mapped_channels:
-        return render_template("error.html", error_message="No Channels Created")
+        if not mapped_channels:
+            return render_template("error.html", error_message="No Channels Created")
 
-    channel_hashtag = request.args.get('c')
+        channel_hashtag = request.args.get('c')
 
-    if channel_hashtag is None:
-        random_channel = random.choice(mapped_channels)
-        random_channel_hashtag = random_channel["hashtag"]
-        return redirect("/?c="+random_channel_hashtag)
-    else:
-        current_url_index = 0
+        if channel_hashtag is None:
+            random_channel = random.choice(mapped_channels)
+            random_channel_hashtag = random_channel["hashtag"]
+            return redirect("/?c="+random_channel_hashtag)
+        else:
+            current_url_index = 0
 
-        current_channel = db.find_channel_by_hashtag(channel_hashtag)
+            current_channel = db.find_channel_by_hashtag(channel_hashtag)
 
-        for i, timestamp in enumerate(current_channel["url_timestamps"]):
-            if timestamp == current_channel["video_start"]:
-                current_url_index = i 
+            for i, timestamp in enumerate(current_channel["url_timestamps"]):
+                if timestamp == current_channel["video_start"]:
+                    current_url_index = i 
 
-        # print mapped_channels
-        return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=dumps(current_channel), current_url_index=current_url_index)
-
+            # print mapped_channels
+            return render_template("index.html", channels=json.dumps(mapped_channels), current_channel=dumps(current_channel), current_url_index=current_url_index)
+    except Exception as e:
+        print e
 @app.route("/createChannel", methods=["POST"])
 def createChannel():
     error = [
