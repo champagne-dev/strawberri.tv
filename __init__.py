@@ -1,3 +1,4 @@
+import eventlet
 import json, os, sys, atexit, random, argparse
 if __name__ != "__main__":
     sys.path.insert(0,"/var/www/strawberri/strawberri")
@@ -124,7 +125,7 @@ if __name__ == "__main__":
     #     atexit.register(close_handler)
     #     cwd = os.path.dirname(os.path.realpath(__file__))
     #     c.run(cwd+"/pushURL.py", False)
-    socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"])    
+    socketio.run(app, debug=config.server["debug"], host=config.server["host"], port=config.server["port"], async_mode="eventlet")    
     from clock import run as clock_run
     clock_run()
 # else:
