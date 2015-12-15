@@ -13,14 +13,16 @@ F76F6F
 	height: 100%;
 	top: 0%;
 	background-color: rgba(255,255,255,.98);
-	-webkit-transition: top 1s ease-in-out;
-	-moz-transition: top 1s ease-in-out;
-	-o-transition: top 1s ease-in-out;
-	transition: top 1s ease-in-out;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 	z-index: 5;
+	opacity: 1;
 }
 .create-channel.hidden{
 	top: -100%;
+	opacity: 0;
 }
 .create-channel > .close{
 	background: url(../img/exit_thin.png) no-repeat;
