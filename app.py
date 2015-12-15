@@ -10,7 +10,6 @@ from utils import video
 from flask_socketio import SocketIO
 from websockets import websockets
 
-
 parser = argparse.ArgumentParser(description='strawberri server')
 parser.add_argument('-c', '--cron', action='store_true', help='runs cron')
 
@@ -115,7 +114,7 @@ try:
         db.init_channels()
 except:
     db.init_channels()
-    
+
 if __name__ == "__main__":
     # args = parser.parse_args()
     # if args.cron:

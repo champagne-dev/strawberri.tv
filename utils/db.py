@@ -10,7 +10,7 @@ mongo_url = 'mongodb://'+host+':'+port+'/'
 database_name = config.db["dbname"]
 
 client = MongoClient(mongo_url)
-db = client[database_name]
+database = client[database_name]
 
 def getHashtag(channel_name):
 	hashtag = ""
@@ -22,16 +22,16 @@ def getHashtag(channel_name):
 	return hashtag
 
 def channel_count():
-	return db.channels.count()
+	return database.channels.count()
 
 def find_all_channels():
-	return db.channels.find({})
+	return database.channels.find({})
 
 def find_channel_by_hashtag(channel_hashtag):
-	return db.channels.find_one({"hashtag": channel_hashtag})
+	return database.channels.find_one({"hashtag": channel_hashtag})
 
 def channel_exists(channel_name):
-	count = db.channels.find({'channel_name': channel_name}).count()
+	count = database.channels.find({'channel_name': channel_name}).count()
 	if count > 0:
 		return True
 	else:
@@ -66,7 +66,7 @@ def create_channel(channel_name):
 		channel["video_start"] = t
 		if url[1] == True:
 			channel["pageIndex"] = 1
-		channel_id = db.channels.insert_one(channel).inserted_id
+		channel_id = database.channels.insert_one(channel).inserted_id
 
 		print str(channel_id)+" created"
 		return channel
@@ -102,7 +102,7 @@ def channel_push_url(channel_name, url, new_page, google_next):
 				"pageIndex": 1
 			}
 
-		db.channels.update_one({
+		database.channels.update_one({
 			'channel_name': channel_name
 		}, 
 		{
@@ -111,7 +111,7 @@ def channel_push_url(channel_name, url, new_page, google_next):
 				"url_timestamps" : -1 
 			}
 		}, upsert=False)
-		db.channels.update_one({
+		database.channels.update_one({
 			'channel_name': channel_name
 		}, query, upsert=False)
 		return True
@@ -129,7 +129,7 @@ def init_channels():
 def channel_push_tweet(channel_name, tweet_object):
 	tweet_string = json.dumps(tweet_object)
 	try:
-		db.channels.update_one({
+		database.channels.update_one({
 			'channel_name': channel_name
 		}, {
 			'$push': {
@@ -142,7 +142,7 @@ def channel_push_tweet(channel_name, tweet_object):
 
 def channel_set_tweets(channel_name, tweets):
 	try:
-		db.channels.update_one({
+		database.channels.update_one({
 			'channel_name': channel_name
 		}, {
 			'$set': {
