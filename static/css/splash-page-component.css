@@ -17,7 +17,7 @@
 	height: 100%;
 }
 .splash-page > .wrapper > .centered{
-	width: 30%;
+	width: auto;
 	margin: auto;
 	height: 60%;
 	top: 25%;
