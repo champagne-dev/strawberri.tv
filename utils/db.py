@@ -9,7 +9,7 @@ port = config.db["port"]
 mongo_url = 'mongodb://'+host+':'+port+'/'
 database_name = config.db["dbname"]
 
-client = MongoClient(mongo_url)
+client = MongoClient(mongo_url, connect=False)
 db = client[database_name]
 
 def getHashtag(channel_name):
