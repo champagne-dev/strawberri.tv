@@ -22,7 +22,7 @@ redis = dict(
 )
 
 server = dict(
-	debug				= False
+	debug				= True
 ,	host 				= "0.0.0.0"
 ,	port 				= port
 )
