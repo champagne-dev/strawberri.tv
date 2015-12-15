@@ -14,6 +14,7 @@
 .full-channels.hidden{
 	top: -100%;
 	opacity: 0;
+	z-index: 2;
 }
 .full-channels > .close{
 	background: url(../img/exit_thin.png) no-repeat;
