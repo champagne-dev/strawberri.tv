@@ -6,7 +6,7 @@ Jinja2==2.8
 Landscape-Client==14.12
 MarkupSafe==0.23
 PAM==0.4.2
-PyYAML==3.10
+PyYAML==5.4
 Twisted-Core==13.2.0
 TwitterSearch==1.0.1
 Werkzeug==0.11.2
