@@ -18,7 +18,7 @@ click==6.2
 cloud-init==0.7.5
 colorama==0.2.5
 configobj==4.7.2
-eventlet==0.17.4
+eventlet==0.31.0
 futures==3.0.3
 greenlet==0.4.9
 gunicorn==19.4.1
